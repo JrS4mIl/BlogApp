@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import home
+from .views import home,register,login,logout
 from django.conf import settings
 from django.conf.urls.static import static
 from blogs import views as BlogsView
@@ -24,8 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
     path('category/',include('blogs.urls')),
-    path('<slug:slug>',BlogsView.single_blog,name='single_blog'),
-    path('blogs/search/',BlogsView.search,name='search')
+    path('blogs/<slug:slug>',BlogsView.single_blog,name='single_blog'),
+    path('blogs/search/',BlogsView.search,name='search'),
+    path('register/',register,name='register'),
+    path('login/',login,name='login'),
+    path('logout/',logout,name='logout')
 
 ]
 if settings.DEBUG:
