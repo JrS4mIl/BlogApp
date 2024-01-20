@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from blogs.models import Category, Blogs
 from django.contrib.auth.decorators import login_required
-from .form import CategoryForm, BlogPostForm,AddUserForm,EditUserForm
+from .form import CategoryForm, BlogPostForm,AddUserForm,EditUserForm,EditBlogForm
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
@@ -92,7 +92,7 @@ def add_post(request):
 def edit_post(request,pk):
     post=get_object_or_404(Blogs,pk=pk)
     if request.method=='POST':
-        form = BlogPostForm(request.POST,request.FILES,instance=post)
+        form = EditBlogForm(request.POST,request.FILES,instance=post)
         if form.is_valid():
             post=form.save()
             title = form.cleaned_data['title']
@@ -102,7 +102,7 @@ def edit_post(request,pk):
 
 
 
-    form=BlogPostForm(instance=post)
+    form=EditBlogForm(instance=post)
     context = {
         'form': form,
         'post':post

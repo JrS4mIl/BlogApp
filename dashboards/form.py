@@ -9,8 +9,11 @@ class CategoryForm(forms.ModelForm):
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model=Blogs
-        fields=('title','category','featured_image','short_description','blog_body','status','is_featured')
-
+        fields=('title','category','featured_image','short_description','blog_body')
+class EditBlogForm(forms.ModelForm):
+    class Meta:
+        model=Blogs
+        fields = ('title', 'category', 'featured_image', 'short_description', 'blog_body', 'status', 'is_featured')
 class AddUserForm(UserCreationForm):
     class Meta:
         model=User
